@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import Card from './Card';
-import CreateNewCard from './CreateNewCard';
+import Cards from './Cards';
 
 
 const Category = ({ categoryTitle, categoryId, categoryCards, addCard, deleteCard, deleteCategory }) => {
@@ -8,8 +7,9 @@ const Category = ({ categoryTitle, categoryId, categoryCards, addCard, deleteCar
     const [editMode, setEditMode] = useState(false)
 
     const handleEditModeAndDelete = (e) => {
+
         // Edit mode: when clicking the title of category
-        if (e.target.classList.contains('categoryTitleFont')) {
+        if (e.target.classList.contains('enableEditMode')) {
             setEditMode(editMode === true ? false : true)
         }
 
@@ -29,36 +29,25 @@ const Category = ({ categoryTitle, categoryId, categoryCards, addCard, deleteCar
 
     return (
         <div className="category" data-id={categoryId}>
-            <div className="mt-5 mb-2 categoryTitleFont">
-
-                <b className="categoryTitleFont" onClick={handleEditModeAndDelete}>
+            <div className="mt-5 mb-2 categoryTitleFont" onClick={handleEditModeAndDelete}>
+                <b className="categoryTitleFont enableEditMode">
                     <i className={`fas fa-trash-alt trashingTheCategory ${editMode === true ? "trashingCatVisible" : "trashingCatInvisible"}`}></i>
 
                     {categoryTitle}
+
                 </b>
             </div>
 
-            <div className="cardsContainerWhole">
 
-                <div className="cardsContainer">
-                    {categoryCards.map(card =>
-                        <Card
-                            key={card._id}
-                            id={card._id}
-                            title={card.title}
-                            body={card.body}
-                            belongingCategoryId={categoryId}
-                            deleteCard={deleteCard}
-                        />)}
-                </div>
 
-                <div className="containerOfNewCardBtn">
-                    <CreateNewCard
-                        addCard={addCard}
-                        categoryId={categoryId} />
-                </div>
+            <Cards
+                categoryCards={categoryCards}
+                addCard={addCard}
+                deleteCard={deleteCard}
+                categoryId={categoryId}
+            />
 
-            </div>
+
         </div>
     )
 

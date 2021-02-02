@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import CardServices from '../services/cards';
 import CategoryServices from '../services/categories';
-import Category from './Category';
 import CreateNewCategory from './CreateNewCategory';
+import Categories from './Categories';
 
 
 
@@ -90,19 +90,12 @@ const App = () => {
   return (
     <div className="App">
 
-      {categories.map(category =>
-        <Category
-          key={category._id}
-
-          categoryTitle={category.title}
-          categoryId={category._id}
-          categoryCards={category.cards}
-
-          addCard={addCard}
-          deleteCard={deleteCard}
-          deleteCategory={deleteCategory}
-        />)}
-
+      <Categories
+        categories={categories}
+        addCard={addCard}
+        deleteCard={deleteCard}
+        deleteCategory={deleteCategory}
+      />
 
       <CreateNewCategory addCat={addCat} />
 

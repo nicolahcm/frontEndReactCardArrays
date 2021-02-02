@@ -1,34 +1,47 @@
 import React, { useState } from 'react';
 
+
+
 const CreateNewCategory = ({ addCat }) => {
 
-    const [modeAdd, setModeAdd] = useState(false)
+    const [mode, setMode] = useState("buttonMode")
     const [titleCategory, setTitleCategory] = useState("")
 
-    const toggleModeAdd = (e) => {
+    const toggleMode = (e) => {
         e.preventDefault()
-        setModeAdd(modeAdd === false ? true : false)
+        setMode(mode === "buttonMode" ? "formMode" : "buttonMode")
     }
 
     const handleChangeInputCat = (e) => {
         setTitleCategory(e.target.value)
     }
 
-    const handleAddBtnCatSend = (e) => {
+
+    // Do not need to name it handleClickBtnAddCategory, because we already are in "CreateNewCategory" component.
+    const handleClickBtnAdd = (e) => {
         e.preventDefault()
-        addCat(titleCategory)
+
+        // Need to handle multiple spaces! REGEX to study?
+        if (titleCategory === "") {
+            alert('Insert a title!')
+        }
+        else {
+            addCat(titleCategory)
+        }
 
         // clean field:
         setTitleCategory("")
     }
 
-    if (!modeAdd) {
+
+
+    if (mode === "buttonMode") {
         return (
             <div className="createNewCategoryContainer mt-5 mb-5" >
-                <i className="fas fa-plus-circle addBtnCategory" title="create new category" onClick={toggleModeAdd}></i>
+                <i className="fas fa-plus-circle addBtnCategory" title="create new category" onClick={toggleMode}></i>
             </div>
         )
-    } else if (modeAdd) {
+    } else if (mode === "formMode") {
         return (
             <div className="categoryAddBtnContainer">
                 <div className="formWrapper mt-5">
@@ -42,8 +55,8 @@ const CreateNewCategory = ({ addCat }) => {
                                 onChange={handleChangeInputCat} />
                         </div>
                         <div className="buttonsContainerForm">
-                            <button className="btn btn-primary" onClick={handleAddBtnCatSend}>Add</button>
-                            <button className="btn btn-primary" onClick={toggleModeAdd}>Back</button>
+                            <button className="btn btn-primary" onClick={handleClickBtnAdd}>Add</button>
+                            <button className="btn btn-primary" onClick={toggleMode}>Back</button>
                         </div>
                     </form>
                 </div>

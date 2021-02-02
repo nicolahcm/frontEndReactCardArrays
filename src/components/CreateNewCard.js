@@ -4,6 +4,8 @@ import React, { useState } from 'react';
 
 const CreateNewCard = ({ addCard, categoryId }) => {
 
+    // This is either the button or the form for creating a new card.
+
     const [modeAdd, setModeAdd] = useState(false)
     const [titleCard, setTitleCard] = useState("")
     const [bodyCard, setBodyCard] = useState("")
@@ -12,72 +14,57 @@ const CreateNewCard = ({ addCard, categoryId }) => {
     const toggleModeAdd = (e) => {
         e.preventDefault()
         setModeAdd(modeAdd === true ? false : true)
-
     }
 
-    const changeTitleHandler = (e) => {
+    const handleChangeTitle = (e) => {
         setTitleCard(e.target.value)
     }
 
-    const changeBodyHandler = (e) => {
+    const handleChangeBody = (e) => {
         setBodyCard(e.target.value)
     }
 
-    const handleAddButton = (e) => {
+    const handleClickBtnAdd = (e) => {
         e.preventDefault()
-        console.log("Works!")
-
         addCard(titleCard, bodyCard, categoryId)
-
         toggleModeAdd(e)
     }
 
+
+    // Button mode
     if (!modeAdd) {
         return (
-            <span className="createNewCardContainer mb-4">
-                <i className="fas fa-plus-circle addBtnCard" title="create new card" onClick={toggleModeAdd}></i>
-            </span>
-        )
-    } else if (modeAdd) {
-        return (
-            <div className="formWrapper">
-                <form >
-                    <div className="mb-3">
-                        <label className="form-label">Title</label>
-                        <input type="text" className="form-control input-sm" placeholder="Insert the title of the card" value={titleCard} onChange={changeTitleHandler} />
-                    </div>
-                    <div className="mb-3">
-                        <label className="form-label">Content</label>
-                        <textarea rows="4" type="text" className="form-control input-group-sm" placeholder="Insert the content of the card" value={bodyCard} onChange={changeBodyHandler} />
-                    </div>
-                    <div className="buttonsContainerForm">
-                        <button className="btn btn-primary" onClick={handleAddButton}>Add</button>
-                        <button className="btn btn-primary" onClick={toggleModeAdd}>Back</button>
-                    </div>
-                </form>
+            <div className="containerOfNewCardBtn">
+                <span className="createNewCardContainer mb-4">
+                    <i className="fas fa-plus-circle addBtnCard" title="create new card" onClick={toggleModeAdd}></i>
+                </span>
             </div>
         )
     }
 
-
-
-    ///    1ST SOLUTION. THIS WORKS. When trying to change colors to button. The above one is more elegant!
-    ////
-
-    // if (color === "normal") {
-    //     return (
-    //         <span className="createNewCardContainer mb-4">
-    //             <i className="fas fa-plus-circle addBtnCard" title="create new card" onClick={changeColor}></i>
-    //         </span>
-    //     )
-    // } else if (color === "green") {
-    //     return (
-    //         <span className="createNewCardContainer mb-4">
-    //             <i className="fas fa-plus-circle addBtnCardGreen" title="create new card" onClick={changeColor}></i>
-    //         </span>
-    //     )
-    // }
-
+    // Form mode
+    else if (modeAdd) {
+        return (
+            <div className="containerOfNewCardBtn">
+                <div className="formWrapper">
+                    <form >
+                        <div className="mb-3">
+                            <label className="form-label">Title</label>
+                            <input type="text" className="form-control input-sm" placeholder="Insert the title of the card" value={titleCard} onChange={handleChangeTitle} />
+                        </div>
+                        <div className="mb-3">
+                            <label className="form-label">Content</label>
+                            <textarea rows="4" type="text" className="form-control input-group-sm" placeholder="Insert the content of the card" value={bodyCard} onChange={handleChangeBody} />
+                        </div>
+                        <div className="buttonsContainerForm">
+                            <button className="btn btn-primary" onClick={handleClickBtnAdd}>Add</button>
+                            <button className="btn btn-primary" onClick={toggleModeAdd}>Back</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        )
+    }
 }
 
 
