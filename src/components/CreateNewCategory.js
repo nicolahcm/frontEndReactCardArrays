@@ -21,12 +21,14 @@ const CreateNewCategory = ({ addCat }) => {
     const handleClickBtnAdd = (e) => {
         e.preventDefault()
 
-        // Need to handle multiple spaces! REGEX to study?
-        if (titleCategory === "") {
-            alert('Insert a title!')
-        }
-        else {
+        console.log(titleCategory.match(/\S/g))
+        //REGEX: returns an array with all characters different from space.
+        // If there are only spaces (no other different characters), is NULL
+
+        if (titleCategory.match(/\S/g)) {
             addCat(titleCategory)
+        } else {
+            alert('Insert a valid title!')
         }
 
         // clean field:

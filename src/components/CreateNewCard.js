@@ -28,6 +28,10 @@ const CreateNewCard = ({ addCard, categoryId }) => {
         e.preventDefault()
         addCard(titleCard, bodyCard, categoryId)
         toggleModeAdd(e)
+
+        // clear fields.
+        setTitleCard("")
+        setBodyCard("")
     }
 
 
