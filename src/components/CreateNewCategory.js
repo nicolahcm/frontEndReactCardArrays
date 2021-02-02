@@ -45,7 +45,7 @@ const CreateNewCategory = ({ addCat }) => {
         )
     } else if (mode === "formMode") {
         return (
-            <div className="categoryAddBtnContainer">
+            <div className="categoryAddBtnContainer mb-5">
                 <div className="formWrapper mt-5">
                     <form >
                         <div className="mb-3">

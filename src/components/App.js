@@ -23,14 +23,13 @@ const App = () => {
 
   useEffect(() => {
     categoryServices.getAllCategories().then(categories => {
-      console.log(`all the data is ${categories}`)
+      console.log("all the data is", categories)
       setCategories(categories)
     })
   }, [])
 
 
   const addCard = (cardTitle, cardBody, categoryIdToUpdate) => {
-
     cardServices.addCardToCategory(cardTitle, cardBody, categoryIdToUpdate)
       .then(categoryUpdated => {
         setCategories(categories.map(category => category._id === categoryIdToUpdate ? categoryUpdated : category))
@@ -39,7 +38,6 @@ const App = () => {
 
 
   const addCat = (newCategoryTitle) => {
-
     categoryServices.createCategory(newCategoryTitle)
       .then(idCategory => {  //the response from backend is the id of the new category created. Should change the backend.
         console.log(`new category! with id ${idCategory}`)
@@ -49,7 +47,6 @@ const App = () => {
 
 
   const deleteCard = (idCard, belongingCategoryId) => {
-
     cardServices.deleteCard(idCard)
       .then(deletedCard => {
         console.log("deletedCard is", deletedCard)
@@ -64,11 +61,33 @@ const App = () => {
 
 
   const deleteCategory = (idCategory) => {
-
     categoryServices.deleteCategory(idCategory)
       .then(deletedCategory => {
         console.log("deleted category is", deletedCategory)
         setCategories(categories.filter(category => category._id !== idCategory))
+      })
+  }
+
+
+  const updateCard = (cardBody, cardTitle, cardId, belongingCategoryId) => {
+    cardServices.updateCard(cardBody, cardTitle, cardId)
+      .then(updatedCard => {
+
+        const categoryToUpdate = categories.find(category => category._id === belongingCategoryId)
+        const categoryUpdated = {
+          ...categoryToUpdate,
+          cards: categoryToUpdate.cards.map(card => card._id === cardId ? updatedCard : card)
+        }
+
+        setCategories(categories.map(category => category._id === belongingCategoryId ? categoryUpdated : category))
+
+      })
+  }
+
+  const updateCategory = (newCategoryTitle, categoryId) => {
+    return categoryServices.updateCategory(categoryId, newCategoryTitle)
+      .then(updatedCategory => {
+        setCategories(categories.map(category => category._id === categoryId ? updatedCategory : category))
       })
   }
 
@@ -78,9 +97,12 @@ const App = () => {
 
       <Categories
         categories={categories}
+
         addCard={addCard}
         deleteCard={deleteCard}
         deleteCategory={deleteCategory}
+        updateCard={updateCard}
+        updateCategory={updateCategory}
       />
 
       <CreateNewCategory addCat={addCat} />

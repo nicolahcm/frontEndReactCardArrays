@@ -34,4 +34,21 @@ export default class CategoryServices {
 
         return deletedCategory
     }
+
+
+    async updateCategory(categoryId, titleNewCategory) {
+        let firstReq = await fetch(`${this.baseUrl}/${categoryId}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ categoryTitle: titleNewCategory })
+        })
+        let updatedCategory = await firstReq.json()
+
+        return updatedCategory
+    }
+
+
+
+
+
 }

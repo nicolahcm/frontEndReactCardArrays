@@ -36,6 +36,16 @@ export default class CardServices {
     }
 
 
+    async updateCard(cardBody, cardTitle, cardId) {
+        let firstReq = await fetch(`${this.baseUrl}/${cardId}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ cardBody: cardBody, cardTitle: cardTitle })
+        })
+        let updatedCard = await firstReq.json()
+
+        return updatedCard
+    }
 
 
 }

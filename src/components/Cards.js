@@ -4,7 +4,7 @@ import CreateNewCard from './CreateNewCard';
 
 
 
-const Cards = ({ categoryCards, categoryId, deleteCard, addCard }) => {
+const Cards = ({ categoryCards, categoryId, deleteCard, addCard, updateCard }) => {
     return (
         <div className="cardsContainerWhole">
             <div className="cardsContainer">
@@ -15,7 +15,9 @@ const Cards = ({ categoryCards, categoryId, deleteCard, addCard }) => {
                         title={card.title}
                         body={card.body}
                         categoryId={categoryId}
+
                         deleteCard={deleteCard}
+                        updateCard={updateCard}
                     />)}
             </div>
 

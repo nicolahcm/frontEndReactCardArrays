@@ -41,8 +41,7 @@ b.categoryTitleFont {
   font-size: 50px;
   color: white;
   cursor: pointer;
-  min-height: 60px;
-  min-width: 50px;
+  position: relative;
 }
 
 .addBtnCardGreen {
@@ -82,14 +81,40 @@ form {
 
 .trashingCatVisible {
   position: absolute;
-  right:60px;
+  right:-100px;
+  bottom: 10px;
   display: block;
   cursor: pointer;
+  
 }
 
 .trashingCatInvisible {
   position: absolute;
   right:60px;
+  display: none;
+
+}
+
+.editCatVisible {
+  left: -100px;
+  position: absolute;
+  bottom: 10px;
+  display: block;
+}
+
+.editCatInvisible {
+  display: none;
+}
+
+.editCard {
+  width: 30px;
+}
+
+.editCardVisible {
+  display: block;
+}
+
+.editCardInvisible {
   display: none;
 
 }

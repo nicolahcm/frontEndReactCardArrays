@@ -4,7 +4,7 @@ import Category from './Category';
 
 
 
-const Categories = ({ categories, addCard, deleteCard, deleteCategory }) => {
+const Categories = ({ categories, addCard, deleteCard, deleteCategory, updateCard, updateCategory }) => {
 
 
     return (
@@ -21,6 +21,8 @@ const Categories = ({ categories, addCard, deleteCard, deleteCategory }) => {
                         addCard={addCard}
                         deleteCard={deleteCard}
                         deleteCategory={deleteCategory}
+                        updateCard={updateCard}
+                        updateCategory={updateCategory}
                     />)
             }
         </div>
