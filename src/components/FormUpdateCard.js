@@ -1,10 +1,6 @@
 import React, { useState } from 'react';
 
-
-
-
 const FormUpdateCard = ({ id, title, body, categoryId, updateCard, toggleMode }) => {
-
 
     const [titleCardState, setTitleCardState] = useState(title)
     const [bodyCardState, setBodyCardState] = useState(body)
@@ -50,8 +46,6 @@ const FormUpdateCard = ({ id, title, body, categoryId, updateCard, toggleMode })
             </div>
         </div>
     )
-
-
 }
 
 export default FormUpdateCard

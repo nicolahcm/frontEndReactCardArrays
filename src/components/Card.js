@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 const Card = ({ id, title, body, categoryId, deleteCard, toggleMode }) => {
 
 
-    const [showEditBtn, setShowEditBtn] = useState(false)
+    const [showEditAndDeleteBtns, setShowAndDeleteBtns] = useState(false)
 
     const handleClickOnCard = (e) => {
 
@@ -28,15 +28,15 @@ const Card = ({ id, title, body, categoryId, deleteCard, toggleMode }) => {
 
         // HIDE BTNS
         else {
-            setShowEditBtn(showEditBtn === true ? false : true)
+            setShowAndDeleteBtns(showEditAndDeleteBtns === true ? false : true)
         }
     }
 
 
     return (
         <div className="card text-white bg-primary mb-3 singleCardForArr" data-id={id} data-belongingcategoryid={categoryId} onClick={handleClickOnCard}>
-            <i className={`fas fa-trash-alt trashingTheCard ${showEditBtn === true ? "trashingCardVisible" : "trashingCardInvisible"}`}></i>
-            <i className={`fas fa-edit editCard ${showEditBtn === true ? "editCardVisible" : "editCardInvisible"}`}></i>
+            <i className={`fas fa-trash-alt trashingTheCard ${showEditAndDeleteBtns === true ? "trashingCardVisible" : "trashingCardInvisible"}`}></i>
+            <i className={`fas fa-edit editCard ${showEditAndDeleteBtns === true ? "editCardVisible" : "editCardInvisible"}`}></i>
             <div className="card-body">
                 <h5 className="card-title">{title}</h5>
                 <p className="card-text">{body}</p>

@@ -1,4 +1,4 @@
-import CardORForm from './CardOrForm';
+import CardOrForm from './CardOrForm';
 import CreateNewCard from './CreateNewCard';
 
 
@@ -9,7 +9,7 @@ const Cards = ({ categoryCards, categoryId, deleteCard, addCard, updateCard }) =
         <div className="cardsContainerWhole">
             <div className="cardsContainer">
                 {categoryCards.map(card =>
-                    <CardORForm
+                    <CardOrForm
                         key={card._id}
                         id={card._id}
                         title={card.title}
