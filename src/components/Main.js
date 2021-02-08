@@ -7,11 +7,11 @@ import CategoryServices from '../services/categoryServices';
 import CreateNewCategory from './CreateNewCategory';
 import Categories from './Categories';
 
-// should I initialize it inside App? Even if it rerenders it, nothing changes, but might be slower.
+// should I initialize it inside Main? Even if it rerenders it, nothing changes, but might be slower.
 const categoryServices = new CategoryServices()
 const cardServices = new CardServices()
 
-const App = () => {
+const Main = ({ togglePageMode }) => {
 
   const [categories, setCategories] = useState([])
 
@@ -105,4 +105,4 @@ const App = () => {
   );
 }
 
-export default App;
+export default Main;
