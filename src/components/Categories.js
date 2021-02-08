@@ -1,5 +1,5 @@
 import React from 'react';
-import Category from './Category';
+import CategoryContainer from './CategoryContainer'
 
 
 
@@ -11,7 +11,7 @@ const Categories = ({ categories, addCard, deleteCard, deleteCategory, updateCar
         <div>
             {
                 categories.map(category =>
-                    <Category
+                    <CategoryContainer
                         key={category._id}
 
                         categoryTitle={category.title}
