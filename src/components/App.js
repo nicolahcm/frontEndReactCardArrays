@@ -7,15 +7,9 @@ import CategoryServices from '../services/categoryServices';
 import CreateNewCategory from './CreateNewCategory';
 import Categories from './Categories';
 
-
-
 // should I initialize it inside App? Even if it rerenders it, nothing changes, but might be slower.
 const categoryServices = new CategoryServices()
 const cardServices = new CardServices()
-
-
-
-
 
 const App = () => {
 
