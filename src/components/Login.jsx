@@ -11,9 +11,20 @@ const Login = ({ togglePageMode }) => {
     const handleClickLogin = (e) => {
         e.preventDefault()
 
-        if (username === "nicola" && password == "hiEveryone") {
-            togglePageMode()
-        }
+        fetch('http://localhost:5000/api/users/login', {
+            method: "POST",
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ password: password, username: username })
+        })
+            .then(firstReq => {
+                console.log(firstReq)
+                return firstReq.json()
+            })
+            .then(result => {   // result is either the token or the error.
+                if (result.ableToLogin) {
+                    togglePageMode("Main")
+                }
+            })
     }
 
     const handleChangeUsername = (e) => {
@@ -24,16 +35,24 @@ const Login = ({ togglePageMode }) => {
         setPassword(e.target.value)
     }
 
+    const handleClickRegisterBtn = (e) => {
+        e.preventDefault()
+        togglePageMode('Register')
+    }
+
     return (
         <div>
             <form className="mt-5">
 
                 <input type="text" value={username} onChange={handleChangeUsername} />
                 <br />
-                <input type="text" value={password} onChange={handleChangePassword} />
+                <input type="password" value={password} onChange={handleChangePassword} />
                 <br />
                 <input type="button" onClick={handleClickLogin} value="LOGIN" />
             </form>
+            <br />
+
+            <input type="button" onClick={handleClickRegisterBtn} value="Not a user yet? Register!" />
 
         </div>
     )
