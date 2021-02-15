@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import MessageLoginRegister from './MessageLoginRegister';
+import { Link } from 'react-router-dom';
 
 const Register = ({ togglePageMode }) => {
 
@@ -37,10 +38,6 @@ const Register = ({ togglePageMode }) => {
         setConfirmPassword(e.target.value)
     }
 
-    const handleClickLoginBtn = (e) => {
-        e.preventDefault()
-        togglePageMode('Login')
-    }
 
     const handleClickRegisterBtn = (e) => {
         e.preventDefault()
@@ -90,10 +87,11 @@ const Register = ({ togglePageMode }) => {
                 <br />
                 <input type="password" value={confirmPassword} onChange={handleChangeConfirmPassword} placeholder="confirm password" />
                 <br />
-                <input type="button" onClick={handleClickLoginBtn} className="ml-2" value="Already registered? Login here" />
-                <input type="button" onClick={handleClickRegisterBtn} className="mr-2" value="Register" />
-
+                <input type="button" onClick={handleClickRegisterBtn} value="Register" />
             </form>
+
+            {/* <Redirect to="/login"> <button> Already a user? Login here</button></Redirect> ... This immediately redirects somewhere else...  */}
+            <Link to="/login"> <button> Already a user? Login here</button> </Link>
 
 
 
