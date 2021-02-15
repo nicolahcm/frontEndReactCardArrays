@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-
+import React, { useState, useEffect } from 'react';
+import MessageLoginRegister from './MessageLoginRegister';
 
 
 
@@ -7,6 +7,24 @@ const Login = ({ togglePageMode }) => {
 
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
+
+    const [msg, setMsg] = useState("Hi")
+    const [typeMsg, setTypeMsg] = useState("null")
+
+
+
+
+
+    useEffect(() => {
+        return () => {
+            console.log("component unmounted")
+            clearTimeout(timer)
+        }
+    }, [])
+
+    const timer = () => setTimeout(() => setTypeMsg('null'), 5000)
+
+
 
     const handleClickLogin = (e) => {
         e.preventDefault()
@@ -23,6 +41,17 @@ const Login = ({ togglePageMode }) => {
             .then(result => {   // result is either the token or the error.
                 if (result.ableToLogin) {
                     togglePageMode("Main")
+
+                    console.log(result)
+                    // Setting local storage!
+                    localStorage.setItem("token", result.token);
+                    localStorage.setItem("user", result.name)
+
+                } else {
+                    setTypeMsg('error')
+                    setMsg('Invalid Password And Username! Or user does not exist')
+
+                    timer()
                 }
             })
     }
@@ -42,17 +71,24 @@ const Login = ({ togglePageMode }) => {
 
     return (
         <div>
+            <MessageLoginRegister
+                msg={msg}
+                typeMsg={typeMsg}
+            />
+
             <form className="mt-5">
 
                 <input type="text" value={username} onChange={handleChangeUsername} />
                 <br />
                 <input type="password" value={password} onChange={handleChangePassword} />
                 <br />
-                <input type="button" onClick={handleClickLogin} value="LOGIN" />
+                <input type="button" onClick={handleClickRegisterBtn} value="New user? Register here!" />
+                <input type="button" onClick={handleClickLogin} value="Login" />
+
             </form>
             <br />
 
-            <input type="button" onClick={handleClickRegisterBtn} value="Not a user yet? Register!" />
+
 
         </div>
     )

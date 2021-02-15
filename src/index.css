@@ -165,3 +165,11 @@ i.addBtnCard:hover {
   cursor: pointer;
 }
 
+
+.errorMsg {
+  background-color: rgb(149, 96, 96);
+}
+
+.successMsg {
+  background-color: rgb(46, 170, 46);
+}

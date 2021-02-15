@@ -6,12 +6,13 @@ import CategoryServices from '../services/categoryServices';
 // components.
 import CreateNewCategory from './CreateNewCategory';
 import Categories from './Categories';
+import Logout from './Logout';
 
 // should I initialize it inside Main? Even if it rerenders it, nothing changes, but might be slower.
 const categoryServices = new CategoryServices()
 const cardServices = new CardServices()
 
-const Main = ({ togglePageMode }) => {
+const Main = ({ togglePageMode, user }) => {
 
   const [categories, setCategories] = useState([])
 
@@ -88,6 +89,10 @@ const Main = ({ togglePageMode }) => {
 
   return (
     <div className="App">
+
+      {user === "" ? null : <h2>Welcome {user}!</h2>}
+
+      <Logout togglePageMode={togglePageMode} />
 
       <Categories
         categories={categories}

@@ -8,6 +8,9 @@ const Register = ({ togglePageMode }) => {
     const [password, setPassword] = useState("")
     const [confirmPassword, setConfirmPassword] = useState("")
 
+    const [msg, setMsg] = useState("Hi")
+    const [typeMsg, setTypeMsg] = useState("null")
+
     const handleChangeName = (e) => {
         setName(e.target.value)
     }
@@ -43,8 +46,16 @@ const Register = ({ togglePageMode }) => {
                     return firstHeaders.json()
                 })
                 .then(savedUser => {
-                    console.log('savedUser successful!,', savedUser)
-                    // Should display some messages and then redirect to the login.
+
+                    if (savedUser.name) {
+                        console.log('savedUser successful!,', savedUser)
+
+                        setMsg("successful registration! Go and register now!")
+                        setTypeMsg("success")
+
+                        setTimeout(() => setTypeMsg("null"), 5000)
+                        // Should then redirect to the login.
+                    }
                 })
         }
     }
@@ -55,6 +66,11 @@ const Register = ({ togglePageMode }) => {
         <div>
             Hi Everyone
 
+            <MessageLoginRegister
+                typeMsg={typeMsg}
+                msg={msg}
+            />
+
             <form>
                 <input type="text" value={name} onChange={handleChangeName} placeholder="insert your name" />
                 <br />
@@ -64,11 +80,13 @@ const Register = ({ togglePageMode }) => {
                 <br />
                 <input type="password" value={confirmPassword} onChange={handleChangeConfirmPassword} placeholder="confirm password" />
                 <br />
-                <input type="button" onClick={handleClickRegisterBtn} value="Register" />
+                <input type="button" onClick={handleClickLoginBtn} className="ml-2" value="Already registered? Login here" />
+                <input type="button" onClick={handleClickRegisterBtn} className="mr-2" value="Register" />
+
             </form>
 
 
-            <input type="button" onClick={handleClickLoginBtn} value="Already a user? Login!" />
+
         </div>
     )
 }
