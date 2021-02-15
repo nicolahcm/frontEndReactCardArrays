@@ -17,12 +17,12 @@ const Login = ({ togglePageMode }) => {
 
     useEffect(() => {
         return () => {
-            console.log("component unmounted")
+            console.log("login component unmounted")
             clearTimeout(timer)
         }
     }, [])
 
-    const timer = () => setTimeout(() => setTypeMsg('null'), 5000)
+    let timer;
 
 
 
@@ -51,7 +51,7 @@ const Login = ({ togglePageMode }) => {
                     setTypeMsg('error')
                     setMsg('Invalid Password And Username! Or user does not exist')
 
-                    timer()
+                    timer = setTimeout(() => setTypeMsg('null'), 5000)
                 }
             })
     }

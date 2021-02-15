@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import MessageLoginRegister from './MessageLoginRegister';
 
 const Register = ({ togglePageMode }) => {
@@ -10,6 +10,16 @@ const Register = ({ togglePageMode }) => {
 
     const [msg, setMsg] = useState("Hi")
     const [typeMsg, setTypeMsg] = useState("null")
+
+
+    useEffect(() => {
+        return () => {
+            console.log("register component unmounted")
+            clearTimeout(timer)
+        }
+    }, [])
+
+    let timer;
 
     const handleChangeName = (e) => {
         setName(e.target.value)
@@ -53,7 +63,7 @@ const Register = ({ togglePageMode }) => {
                         setMsg("successful registration! Go and register now!")
                         setTypeMsg("success")
 
-                        setTimeout(() => setTypeMsg("null"), 5000)
+                        timer = setTimeout(() => setTypeMsg("null"), 5000)
                         // Should then redirect to the login.
                     }
                 })
