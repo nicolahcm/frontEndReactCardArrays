@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import MessageLoginRegister from './MessageLoginRegister';
-
-
+import { Redirect, useHistory } from 'react-router-dom';
 
 const Login = ({ togglePageMode }) => {
 
@@ -10,10 +9,6 @@ const Login = ({ togglePageMode }) => {
 
     const [msg, setMsg] = useState("Hi")
     const [typeMsg, setTypeMsg] = useState("null")
-
-
-
-
 
     useEffect(() => {
         return () => {
@@ -24,7 +19,7 @@ const Login = ({ togglePageMode }) => {
 
     let timer;
 
-
+    let history = useHistory()
 
     const handleClickLogin = (e) => {
         e.preventDefault()
@@ -40,13 +35,15 @@ const Login = ({ togglePageMode }) => {
             })
             .then(result => {   // result is either the token or the error.
                 if (result.ableToLogin) {
-                    togglePageMode("Main")
 
-                    console.log(result)
+                    console.log("result of login is", result)
+
                     // Setting local storage!
                     localStorage.setItem("token", result.token);
                     localStorage.setItem("user", result.name)
 
+                    history.replace('/main')  // Redirects to main. Difference with push being that We cannot go back to login!
+                    // Same as <Redirect to="/main">
                 } else {
                     setTypeMsg('error')
                     setMsg('Invalid Password And Username! Or user does not exist')
@@ -87,8 +84,6 @@ const Login = ({ togglePageMode }) => {
 
             </form>
             <br />
-
-
 
         </div>
     )

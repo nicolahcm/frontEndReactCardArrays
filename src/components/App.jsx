@@ -2,14 +2,15 @@ import React, { useEffect, useState } from 'react';
 import Login from './Login';
 import Main from './Main';
 import Register from './Register';
-import { BrowserRouter as Router, Link, Switch, Route, useHistory } from 'react-router-dom';
+import PrivateRoute from './PrivateRoute';
+import { BrowserRouter as Router, Link, Switch, Route, useHistory, Redirect } from 'react-router-dom';
+
 
 const App = () => {
 
     // const [pageMode, setPageMode] = useState("Login") // or Main or Register
 
-    const [token, setToken] = useState("")
-    const [user, setUser] = useState("")
+    const [token, setToken] = useState(null)
 
     // useEffect(() => {
     //     if (localStorage.getItem('token')) {
@@ -33,9 +34,14 @@ const App = () => {
     return (
         <Router>
 
-            <Link to="/login"> <button> LOGIN </button> </Link>
-            <Link to="/register"> <button> REGISTER </button> </Link>
-            <Link to="/main"> <button>MAIN</button></Link>
+            {
+                token ? <Redirect to="/main" /> :
+                    <>
+                        <Link to="/login"> <button> LOGIN </button> </Link>
+                        <Link to="/register"> <button> REGISTER </button> </Link>
+                        <Link to="/main"> <button>MAIN</button></Link>
+                    </>
+            }
 
             <Route path="/login">
                 <Login />
@@ -45,11 +51,10 @@ const App = () => {
                 <Register />
             </Route>
 
-            <Route path="/main">
-                <Main />
-            </Route>
+            <PrivateRoute path="/main" component={Main} setToken={setToken} />
 
-        </Router>
+
+        </Router >
     )
 
     // if (pageMode === "Login") {

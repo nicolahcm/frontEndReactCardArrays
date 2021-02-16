@@ -1,12 +1,19 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
 
-const Logout = ({ togglePageMode }) => {
+
+const Logout = ({ setToken }) => {
+
+    let history = useHistory()
 
     const handleClick = (e) => {
         e.preventDefault()
-        togglePageMode('Login')
+
+        setToken(null)
         localStorage.clear()
+
+        history.replace('/')
     }
 
 

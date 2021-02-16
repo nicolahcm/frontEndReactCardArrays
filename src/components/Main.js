@@ -12,7 +12,7 @@ import Logout from './Logout';
 const categoryServices = new CategoryServices()
 const cardServices = new CardServices()
 
-const Main = ({ togglePageMode, user }) => {
+const Main = ({ togglePageMode, user, setToken }) => {
 
   const [categories, setCategories] = useState([])
 
@@ -22,6 +22,9 @@ const Main = ({ togglePageMode, user }) => {
       setCategories(categories)
     })
   }, [])
+
+
+  console.log("component Main mounted or updated.")
 
 
   const addCard = (cardTitle, cardBody, categoryIdToUpdate) => {
@@ -92,7 +95,7 @@ const Main = ({ togglePageMode, user }) => {
 
       {user === "" ? null : <h2>Welcome {user}!</h2>}
 
-      <Logout togglePageMode={togglePageMode} />
+      <Logout setToken={setToken} />
 
       <Categories
         categories={categories}
