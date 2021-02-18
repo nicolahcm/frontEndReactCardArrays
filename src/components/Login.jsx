@@ -1,31 +1,42 @@
 import React, { useState, useEffect } from 'react';
 import MessageLoginRegister from './MessageLoginRegister';
-import { Redirect, useHistory, useLocation } from 'react-router-dom';
+import { Redirect, Link, useHistory, useLocation } from 'react-router-dom';
 
-const Login = ({ togglePageMode }) => {
+const Login = () => {
+
 
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
 
     const [msg, setMsg] = useState("Hi")
-    const [typeMsg, setTypeMsg] = useState("null")
-
-    useEffect(() => {
-        return () => {
-            console.log("login component unmounted")
-            clearTimeout(timer)
-        }
-    }, [])
-
+    const [typeMsg, setTypeMsg] = useState("null") // or "error"
 
     const location = useLocation()
     const { state } = location
-    const { from } = state || { from: { pathname: "/" } };
+    const { from } = state || { from: { pathname: "/main" } };
 
-    // console.log("location in login is", location)
 
+    console.log("location in login is", location)
 
     let timer;
+
+    useEffect(() => {
+
+        const { message } = state || { message: "" }
+        console.log("message in Login is", message)
+
+        setMsg(message)
+        setTypeMsg("success")
+
+        let timerLoggedOut = setTimeout(() => setTypeMsg('null'), 3000)
+
+
+        return () => {
+            console.log("login component unmounted")
+            clearTimeout(timer)
+            clearTimeout(timerLoggedOut)
+        }
+    }, [])
 
     let history = useHistory()
 
@@ -70,10 +81,6 @@ const Login = ({ togglePageMode }) => {
         setPassword(e.target.value)
     }
 
-    const handleClickRegisterBtn = (e) => {
-        e.preventDefault()
-        togglePageMode('Register')
-    }
 
     return (
         <div>
@@ -88,7 +95,8 @@ const Login = ({ togglePageMode }) => {
                 <br />
                 <input type="password" value={password} onChange={handleChangePassword} />
                 <br />
-                <input type="button" onClick={handleClickRegisterBtn} value="New user? Register here!" />
+                <Link to="/register">New user? Register Here! </Link>
+
                 <input type="button" onClick={handleClickLogin} value="Login" />
 
             </form>

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import MessageLoginRegister from './MessageLoginRegister';
 import { Link } from 'react-router-dom';
 
-const Register = ({ togglePageMode }) => {
+const Register = () => {
 
     const [name, setName] = useState("")
     const [username, setUsername] = useState("")
@@ -12,8 +12,9 @@ const Register = ({ togglePageMode }) => {
     const [msg, setMsg] = useState("Hi")
     const [typeMsg, setTypeMsg] = useState("null")
 
-
     useEffect(() => {
+        console.log("register component mounted.")
+
         return () => {
             console.log("register component unmounted")
             clearTimeout(timer)
@@ -57,7 +58,7 @@ const Register = ({ togglePageMode }) => {
                     if (savedUser.name) {
                         console.log('savedUser successful!,', savedUser)
 
-                        setMsg("successful registration! Go and register now!")
+                        setMsg("successful registration! Go and login now!")
                         setTypeMsg("success")
 
                         timer = setTimeout(() => setTypeMsg("null"), 5000)
@@ -68,11 +69,8 @@ const Register = ({ togglePageMode }) => {
     }
 
 
-
     return (
         <div>
-            Hi Everyone
-
             <MessageLoginRegister
                 typeMsg={typeMsg}
                 msg={msg}

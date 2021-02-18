@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
-
-
 const Logout = ({ setToken }) => {
 
     let history = useHistory()
@@ -12,10 +10,8 @@ const Logout = ({ setToken }) => {
 
         setToken(null)
         localStorage.clear()
-
-        history.replace('/')
+        history.replace({ pathname: "/login", state: { message: "Successfully Logged Out." } })
     }
-
 
     return (
         <button onClick={handleClick}  >

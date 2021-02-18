@@ -1,8 +1,4 @@
 // Verify token!
-
-
-
-
 const verifyToken = async () => {
 
     let token = localStorage.getItem('token') // if exists is a string.
