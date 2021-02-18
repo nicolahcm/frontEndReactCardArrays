@@ -31,6 +31,7 @@ const App = () => {
     // }
 
 
+
     return (
         <Router>
 
@@ -43,16 +44,17 @@ const App = () => {
                     </>
             }
 
-            <Route path="/login">
-                <Login />
-            </Route>
+            <Switch>
+                <Route path="/login">
+                    <Login />
+                </Route>
 
-            <Route path="/register">
-                <Register />
-            </Route>
+                <Route path="/register">
+                    <Register />
+                </Route>
 
-            <PrivateRoute path="/main" component={Main} setToken={setToken} />
-
+                <PrivateRoute path="/main" component={Main} setToken={setToken} />
+            </Switch>
 
         </Router >
     )

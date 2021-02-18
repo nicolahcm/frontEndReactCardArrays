@@ -19,15 +19,23 @@ const PrivateRoute = ({ component: Component, setToken, ...rest }) => {
     // require authentication. 
 
     useEffect(() => {
+
+        console.log("using effect of Private Route.")
         verifyToken()
             .then((res) => {
                 console.log("res verified is", res)
                 if (res) {
                     setToRender(<Component setToken={setToken} />)
+
+                    setToken(localStorage.getItem('token')) // when setting token, login, register, main buttons disappear.
+
                 } else {
-                    setToRender(<Redirect to="/login" />)
+                    setToRender(<Redirect to={{ pathname: "/login", state: { from: location } }} />)
                 }
             })
+        return () => {
+            console.log("privateroute component unmounted")
+        }
     }, [])
 
 

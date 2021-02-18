@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import MessageLoginRegister from './MessageLoginRegister';
-import { Redirect, useHistory } from 'react-router-dom';
+import { Redirect, useHistory, useLocation } from 'react-router-dom';
 
 const Login = ({ togglePageMode }) => {
 
@@ -16,6 +16,14 @@ const Login = ({ togglePageMode }) => {
             clearTimeout(timer)
         }
     }, [])
+
+
+    const location = useLocation()
+    const { state } = location
+    const { from } = state || { from: { pathname: "/" } };
+
+    // console.log("location in login is", location)
+
 
     let timer;
 
@@ -42,7 +50,8 @@ const Login = ({ togglePageMode }) => {
                     localStorage.setItem("token", result.token);
                     localStorage.setItem("user", result.name)
 
-                    history.replace('/main')  // Redirects to main. Difference with push being that We cannot go back to login!
+                    console.log("history.replace main executing...")
+                    history.replace(from)  // Redirects to main. Difference with push being that We cannot go back to login!
                     // Same as <Redirect to="/main">
                 } else {
                     setTypeMsg('error')

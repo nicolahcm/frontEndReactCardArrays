@@ -4,10 +4,11 @@
 
 
 const verifyToken = async () => {
-    if (localStorage.getItem('token')) {
 
+    let token = localStorage.getItem('token') // if exists is a string.
+    console.log("verify token initialized... token is", token)
 
-        let token = localStorage.getItem('token') // This is a string .
+    if (token) {
 
         console.log("token in local storage is", token)
 
