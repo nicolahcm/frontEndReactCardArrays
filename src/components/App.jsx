@@ -30,7 +30,7 @@ const App = () => {
                     <Register />
                 </Route>
 
-                <PrivateRoute path="/main" component={Main} setToken={setToken} />
+                <PrivateRoute exact path="/main" component={Main} setToken={setToken} />
             </Switch>
         </Router >
     )

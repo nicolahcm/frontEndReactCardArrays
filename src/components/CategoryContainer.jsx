@@ -4,8 +4,11 @@ import CategoryOrForm from './CategoryOrForm';
 
 const CategoryContainer = ({ categoryTitle, categoryId, categoryCards, addCard, deleteCard, deleteCategory, updateCard, updateCategory }) => {
 
+
+
+
     return (
-        <div>
+        <div id={`${categoryId}`} >
             <CategoryOrForm                      // title or form to update category
                 categoryTitle={categoryTitle}
                 categoryId={categoryId}
@@ -21,7 +24,7 @@ const CategoryContainer = ({ categoryTitle, categoryId, categoryCards, addCard, 
                 categoryId={categoryId}
                 updateCard={updateCard}
             />
-        </div>
+        </div >
     )
 }
 

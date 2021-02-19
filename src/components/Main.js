@@ -20,6 +20,9 @@ const Main = ({ setToken }) => {
   const [userName, setUserName] = useState(localStorage.getItem("user"))
 
   useEffect(() => {
+
+    console.log("component main is mounted")
+
     categoryServices.getAllCategories().then(categories => {
       console.log("all the data is", categories)
       setCategories(categories)
@@ -30,7 +33,6 @@ const Main = ({ setToken }) => {
 
   console.log("location in main is", location)
 
-  console.log("component Main mounted or updated.")
 
 
   const addCard = (cardTitle, cardBody, categoryIdToUpdate) => {
@@ -98,7 +100,7 @@ const Main = ({ setToken }) => {
 
   return (
     <div className="App"  >
-      <LateralBar>
+      <LateralBar categories={categories}>
         <h2>Welcome {userName}!</h2>
 
         <Logout setToken={setToken} />
@@ -107,11 +109,7 @@ const Main = ({ setToken }) => {
 
       </LateralBar>
 
-      <div style={{
-        position: "relative",
-        left: "290px",
-        width: "calc(100vw - 302px)"
-      }}>
+      <div>
         <Categories
           categories={categories}
 
