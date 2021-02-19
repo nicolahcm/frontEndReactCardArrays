@@ -1,30 +1,44 @@
 import React, { useState, useEffect } from 'react';
 import MessageLoginRegister from './MessageLoginRegister';
+import { Redirect, Link, useHistory, useLocation } from 'react-router-dom';
 
+const Login = () => {
 
-
-const Login = ({ togglePageMode }) => {
 
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
 
     const [msg, setMsg] = useState("Hi")
-    const [typeMsg, setTypeMsg] = useState("null")
+    const [typeMsg, setTypeMsg] = useState("null") // or "error"
+
+    const location = useLocation()
+    const { state } = location
+    const { from } = state || { from: { pathname: "/main" } };
 
 
-
-
-
-    useEffect(() => {
-        return () => {
-            console.log("login component unmounted")
-            clearTimeout(timer)
-        }
-    }, [])
+    console.log("location in login is", location)
 
     let timer;
 
+    useEffect(() => {
 
+        const { message } = state || { message: "" }
+        console.log("message in Login is", message)
+
+        setMsg(message)
+        setTypeMsg("success")
+
+        let timerLoggedOut = setTimeout(() => setTypeMsg('null'), 3000)
+
+
+        return () => {
+            console.log("login component unmounted")
+            clearTimeout(timer)
+            clearTimeout(timerLoggedOut)
+        }
+    }, [])
+
+    let history = useHistory()
 
     const handleClickLogin = (e) => {
         e.preventDefault()
@@ -40,13 +54,16 @@ const Login = ({ togglePageMode }) => {
             })
             .then(result => {   // result is either the token or the error.
                 if (result.ableToLogin) {
-                    togglePageMode("Main")
 
-                    console.log(result)
+                    console.log("result of login is", result)
+
                     // Setting local storage!
                     localStorage.setItem("token", result.token);
                     localStorage.setItem("user", result.name)
 
+                    console.log("history.replace main executing...")
+                    history.replace(from)  // Redirects to main. Difference with push being that We cannot go back to login!
+                    // Same as <Redirect to="/main">
                 } else {
                     setTypeMsg('error')
                     setMsg('Invalid Password And Username! Or user does not exist')
@@ -64,10 +81,6 @@ const Login = ({ togglePageMode }) => {
         setPassword(e.target.value)
     }
 
-    const handleClickRegisterBtn = (e) => {
-        e.preventDefault()
-        togglePageMode('Register')
-    }
 
     return (
         <div>
@@ -82,13 +95,12 @@ const Login = ({ togglePageMode }) => {
                 <br />
                 <input type="password" value={password} onChange={handleChangePassword} />
                 <br />
-                <input type="button" onClick={handleClickRegisterBtn} value="New user? Register here!" />
+                <Link to="/register">New user? Register Here! </Link>
+
                 <input type="button" onClick={handleClickLogin} value="Login" />
 
             </form>
             <br />
-
-
 
         </div>
     )

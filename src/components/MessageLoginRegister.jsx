@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 
 const MessageLoginRegister = ({ msg, typeMsg }) => {
 
-
     if (typeMsg === "error") {
         return (
             <div className="errorMsg" >

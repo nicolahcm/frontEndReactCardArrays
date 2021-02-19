@@ -1,27 +1,38 @@
 import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
 import CardServices from '../services/cardServices';
 import CategoryServices from '../services/categoryServices';
 
-// components.
 import CreateNewCategory from './CreateNewCategory';
 import Categories from './Categories';
 import Logout from './Logout';
+import LateralBar from './LateralBar';
 
 // should I initialize it inside Main? Even if it rerenders it, nothing changes, but might be slower.
+// Alternative: I instantiate in the initial file and export the instance!
 const categoryServices = new CategoryServices()
 const cardServices = new CardServices()
 
-const Main = ({ togglePageMode, user }) => {
+const Main = ({ setToken }) => {
 
   const [categories, setCategories] = useState([])
+  const [userName, setUserName] = useState(localStorage.getItem("user"))
 
   useEffect(() => {
+
+    console.log("component main is mounted")
+
     categoryServices.getAllCategories().then(categories => {
       console.log("all the data is", categories)
       setCategories(categories)
     })
   }, [])
+
+  const location = useLocation()
+
+  console.log("location in main is", location)
+
 
 
   const addCard = (cardTitle, cardBody, categoryIdToUpdate) => {
@@ -88,23 +99,30 @@ const Main = ({ togglePageMode, user }) => {
 
 
   return (
-    <div className="App">
+    <div className="App"  >
+      <LateralBar categories={categories}>
+        <h2>Welcome {userName}!</h2>
 
-      {user === "" ? null : <h2>Welcome {user}!</h2>}
+        <Logout setToken={setToken} />
 
-      <Logout togglePageMode={togglePageMode} />
 
-      <Categories
-        categories={categories}
 
-        addCard={addCard}
-        deleteCard={deleteCard}
-        deleteCategory={deleteCategory}
-        updateCard={updateCard}
-        updateCategory={updateCategory}
-      />
+      </LateralBar>
 
-      <CreateNewCategory addCat={addCat} />
+      <div>
+        <Categories
+          categories={categories}
+
+
+          addCard={addCard}
+          deleteCard={deleteCard}
+          deleteCategory={deleteCategory}
+          updateCard={updateCard}
+          updateCategory={updateCategory}
+        />
+
+        <CreateNewCategory addCat={addCat} />
+      </div>
 
     </div>
   );

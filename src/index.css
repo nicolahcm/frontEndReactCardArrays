@@ -6,7 +6,24 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #a3c7d5;
+  box-sizing: border-box;
 }
+
+
+html, body {
+  height: 100%;
+  scroll-behavior: smooth !important;
+}
+
+#rightColumnWrapper {
+  overflow-y: scroll;
+  height: 100%
+}
+
+.is-current, a.active {
+  background-color: aqua;
+}
+
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
