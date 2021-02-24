@@ -9,6 +9,7 @@ const Categories = ({ categories, addCard, deleteCard, deleteCategory, updateCar
     const style = {
         position: "relative",
         marginLeft: "290px",
+        marginBottom: "100px",
         height: "100%",
         overflowY: "visible"
     }

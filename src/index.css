@@ -20,8 +20,12 @@ html, body {
   height: 100%
 }
 
+a {
+  color: white;
+}
+
 .is-current, a.active {
-  background-color: aqua;
+  background-color: rgb(110, 173, 173);
 }
 
 
@@ -60,6 +64,8 @@ b.categoryTitleFont {
   cursor: pointer;
   position: relative;
 }
+
+
 
 .addBtnCardGreen {
   font-size: 30px;
@@ -159,6 +165,10 @@ i.addBtnCategory {
   color: white;
 }
 
+.categoriesWrapper {
+  margin-bottom: 50px !important;
+  padding-bottom: 50px !important;
+}
 
 i.addBtnCategory:hover {
   cursor: pointer;
@@ -167,6 +177,7 @@ i.addBtnCategory:hover {
 .createNewCategoryContainer {
   display: flex;
   justify-content: center;
+  margin-left: 290px;
 }
 
 i.addBtnCard {
@@ -189,4 +200,9 @@ i.addBtnCard:hover {
 
 .successMsg {
   background-color: rgb(46, 170, 46);
+}
+
+
+.nav-link:hover {
+  color: rgb(101, 134, 35)
 }

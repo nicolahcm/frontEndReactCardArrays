@@ -109,7 +109,9 @@ const Main = ({ setToken }) => {
 
       </LateralBar>
 
-      <div>
+      <div className="categoriesWrapper" style={{
+        marginBottom: "50px"
+      }}>
         <Categories
           categories={categories}
 
@@ -121,7 +123,9 @@ const Main = ({ setToken }) => {
           updateCategory={updateCategory}
         />
 
-        <CreateNewCategory addCat={addCat} />
+        <div className="mb-5">
+          <CreateNewCategory addCat={addCat} />
+        </div>
       </div>
 
     </div>

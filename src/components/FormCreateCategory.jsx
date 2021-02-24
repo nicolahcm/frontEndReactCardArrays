@@ -30,7 +30,10 @@ const FormCreateCategory = ({ addCat, toggleMode }) => {
     }
 
     return (
-        <div className="categoryAddBtnContainer mb-5">
+        <div className="categoryAddBtnContainer" style={{
+            marginLeft: "290px",
+            marginBottom: "100px !important"
+        }}>
             <div className="formWrapper mt-5">
                 <form >
                     <div className="mb-3">
