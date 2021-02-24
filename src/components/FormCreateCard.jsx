@@ -17,7 +17,10 @@ const FormCreateCard = ({ toggleMode, addCard, categoryId }) => {
 
     const handleClickBtnAdd = (e) => {
         e.preventDefault()
-        addCard(titleCard, bodyCard, categoryId)
+
+        let token = localStorage.getItem('token')
+
+        addCard(titleCard, bodyCard, categoryId, token)
         toggleMode(e)
 
         // clear fields.

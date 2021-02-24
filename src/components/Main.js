@@ -35,16 +35,17 @@ const Main = ({ setToken }) => {
 
 
 
-  const addCard = (cardTitle, cardBody, categoryIdToUpdate) => {
-    cardServices.addCardToCategory(cardTitle, cardBody, categoryIdToUpdate)
+  const addCard = (cardTitle, cardBody, categoryIdToUpdate, token) => {
+    cardServices.addCardToCategory(cardTitle, cardBody, categoryIdToUpdate, token)
       .then(categoryUpdated => {
         setCategories(categories.map(category => category._id === categoryIdToUpdate ? categoryUpdated : category))
       })
   }
 
 
-  const addCat = (newCategoryTitle) => {
-    categoryServices.createCategory(newCategoryTitle)
+
+  const addCat = (newCategoryTitle, token) => {
+    categoryServices.createCategory(newCategoryTitle, token)
       .then(idCategory => {  //the response from backend is the id of the new category created. Should change the backend.
         console.log(`new category! with id ${idCategory}`)
         setCategories(categories.concat({ _id: idCategory, title: newCategoryTitle, cards: [] }))

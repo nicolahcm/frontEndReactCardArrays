@@ -29,7 +29,7 @@ const LateralBar = (props) => {
             <hr></hr>
 
             <Scrollspy id="menuContainerLeft" items={categories.map(cat => cat._id)} currentClassName="is-current">
-                {categories.map(category => <li key={category._id} ><a className="nav-link" href={`#${category._id}`}>{category.title}</a> </li>)}
+                {categories.map(category => <li key={category._id} style={{ color: "white" }}><a className="nav-link" href={`#${category._id}`} style={{ color: "white" }}>{category.title}</a> </li>)}
             </Scrollspy>
 
         </div>

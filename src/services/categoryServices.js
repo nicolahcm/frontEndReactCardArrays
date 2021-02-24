@@ -13,11 +13,15 @@ export default class CategoryServices {
         return categories
     }
 
-    async createCategory(categoryTitle) {
+    async createCategory(categoryTitle, token) {
+
+        let finalToken = `bearer ${token}`
+
+        console.log("finalToken is", finalToken)
 
         let firstReq = await fetch(this.baseUrl, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 'Content-Type': 'application/json', 'Authorization': finalToken },
             body: JSON.stringify({ categoryTitle: categoryTitle })
         })
         let idCategory = await firstReq.json()

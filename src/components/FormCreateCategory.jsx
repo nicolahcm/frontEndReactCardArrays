@@ -17,8 +17,12 @@ const FormCreateCategory = ({ addCat, toggleMode }) => {
         //REGEX: returns an array with all characters different from space.
         // If there are only spaces (no other different characters), is NULL
 
+        let token = localStorage.getItem('token')
+
+        console.log("token in form createCat is", token)
+
         if (titleCategory.match(/\S/g)) {
-            addCat(titleCategory)
+            addCat(titleCategory, token)
         } else {
             alert('Insert a valid title!')
         }

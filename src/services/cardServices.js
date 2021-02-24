@@ -23,11 +23,13 @@ export default class CardServices {
         return deletedCard
     }
 
-    async addCardToCategory(cardTitle, cardBody, categoryIdToUpdate) {
+    async addCardToCategory(cardTitle, cardBody, categoryIdToUpdate, token) {
+
+        let finalToken = `bearer ${token}`
 
         let firstReq = await fetch(this.baseUrl, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 'Content-Type': 'application/json', 'Authorization': finalToken },
             body: JSON.stringify({ belongingCategoryId: categoryIdToUpdate, cardTitle: cardTitle, cardBody: cardBody })
         })
         let categoryUpdated = await firstReq.json()
