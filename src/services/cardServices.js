@@ -3,8 +3,6 @@ export default class CardServices {
         this.baseUrl = "http://localhost:5000/cards"
     }
 
-
-
     async getAllCards() {
 
         let firstReq = await fetch(this.baseUrl)
@@ -14,14 +12,22 @@ export default class CardServices {
     }
 
 
+
+
     async deleteCard(idCard) {
+        let token = localStorage.getItem('token')
+        let finalToken = `bearer ${token}`
         let firstReq = await fetch(`${this.baseUrl}/${idCard}`, {
-            method: 'DELETE'
+            method: 'DELETE',
+            headers: { 'Authorization': finalToken }
         })
         let deletedCard = await firstReq.json()
 
         return deletedCard
     }
+
+
+
 
     async addCardToCategory(cardTitle, cardBody, categoryIdToUpdate, token) {
 
@@ -39,9 +45,13 @@ export default class CardServices {
 
 
     async updateCard(cardBody, cardTitle, cardId) {
+
+        let token = localStorage.getItem('token')
+        let finalToken = `bearer ${token}`
+
         let firstReq = await fetch(`${this.baseUrl}/${cardId}`, {
             method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 'Content-Type': 'application/json', 'Authorization': finalToken },
             body: JSON.stringify({ cardBody: cardBody, cardTitle: cardTitle })
         })
         let updatedCard = await firstReq.json()

@@ -6,8 +6,14 @@ export default class CategoryServices {
 
 
     async getAllCategories() {
+        let token = localStorage.getItem('token')
+        let finalToken = `bearer ${token}`
 
-        let firstReq = await fetch(this.baseUrl)
+
+        let firstReq = await fetch(this.baseUrl, {
+            method: "GET",
+            headers: { 'Authorization': finalToken }
+        })
         let categories = await firstReq.json()
 
         return categories
@@ -31,8 +37,12 @@ export default class CategoryServices {
 
     async deleteCategory(categoryId) {
 
+        let token = localStorage.getItem('token')
+        let finalToken = `bearer ${token}`
+
         let firstReq = await fetch(`${this.baseUrl}/${categoryId}`, {
-            method: 'DELETE'
+            method: 'DELETE',
+            headers: { 'Authorization': finalToken }
         })
         let deletedCategory = await firstReq.json()
 
@@ -41,9 +51,14 @@ export default class CategoryServices {
 
 
     async updateCategory(categoryId, titleNewCategory) {
+
+        let token = localStorage.getItem('token')
+        let finalToken = `bearer ${token}`
+
+
         let firstReq = await fetch(`${this.baseUrl}/${categoryId}`, {
             method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 'Content-Type': 'application/json', 'Authorization': finalToken },
             body: JSON.stringify({ categoryTitle: titleNewCategory })
         })
         let updatedCategory = await firstReq.json()
