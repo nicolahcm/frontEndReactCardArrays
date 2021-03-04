@@ -1,0 +1,10 @@
+{
+  "hosting": {
+    "public": "qq",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}

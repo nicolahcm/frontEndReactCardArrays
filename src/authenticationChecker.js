@@ -1,3 +1,8 @@
+import UserServices from './services/userServices'
+
+
+let userServices = new UserServices()
+
 // Verify token!
 const verifyToken = async () => {
 
@@ -8,11 +13,7 @@ const verifyToken = async () => {
 
         console.log("token in local storage is", token)
 
-        let firstRes = await fetch("http://localhost:5000/api/users/validate", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ token: token })
-        })
+        let firstRes = await userServices.authenticate(token)
 
         let user = await firstRes.json()
 

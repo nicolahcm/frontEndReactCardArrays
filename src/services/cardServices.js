@@ -1,6 +1,6 @@
 export default class CardServices {
     constructor() {
-        this.baseUrl = "http://localhost:5000/cards"
+        this.baseUrl = "/cards"
     }
 
     async getAllCards() {

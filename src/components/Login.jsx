@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import MessageLoginRegister from './MessageLoginRegister';
 import { Redirect, Link, useHistory, useLocation } from 'react-router-dom';
+import UserServices from '../services/userServices';
+
+let userServices = new UserServices()
 
 const Login = () => {
 
@@ -43,11 +46,7 @@ const Login = () => {
     const handleClickLogin = (e) => {
         e.preventDefault()
 
-        fetch('http://localhost:5000/api/users/login', {
-            method: "POST",
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ password: password, username: username })
-        })
+        userServices.login(password, username)
             .then(firstReq => {
                 console.log(firstReq)
                 return firstReq.json()

@@ -1,6 +1,6 @@
 export default class CategoryServices {
     constructor() {
-        this.baseUrl = "http://localhost:5000/categories"
+        this.baseUrl = "/categories"
     }
 
 
